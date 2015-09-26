@@ -1,0 +1,55 @@
+# ignore node.js modules
+node_modules
+.node_modules
+
+# ignore Apple DS Store
+*.DS_Store
+
+# ignore IntelliJ project files
+*.idea
+*.iml
+\#*\#
+
+# ignore log files
+*.log
+
+# ignore swap files
+*.swp
+
+# ctags
+tags
+
+# emacs turds
+*~
+
+# pid files
+*.pid
+
+# mocha? Or some other node test framework?
+.coverage_data
+
+# Stuff in the  github .gitignore for node.js
+lib-cov
+*.seed
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+pids
+logs
+results
+
+# ignore sublime text files
+*.sublime-project
+*.sublime-workspace
+
+# vagrant project files
+.vagrant
+
+tmp
+
+# coverage
+coverage
+doc
+npm-debug.log
