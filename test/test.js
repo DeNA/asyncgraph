@@ -125,7 +125,19 @@ describe('asyncgraph', function(){
 
         graph.start();
     });
-
+    it('should update _initializing flag when start method starts and finishes',function (done) {
+        events.forEach(function(e){
+            graph.register(e, graph);
+        });
+        graph.on('_start',function () {
+            assert(graph._initializing);
+        });
+        graph.on('done',function () {
+            assert(!graph._initializing);
+            done();
+        });
+        graph.start();
+    });
     it('should be able to list events in the order they are added', function(){
         events.forEach(function(e){
             graph.register(e);
@@ -230,5 +242,42 @@ describe('asyncgraph', function(){
         }, dummy);
 
         graph.start();
+    });
+    describe('#deregister',function () {
+        afterEach(function () {
+            graph._initializing = false;
+        });
+        it('should remove registered event if name found', function () {
+            events.forEach(function(e){
+                graph.register(e, graph);
+            });
+            assert.equal(graph.listEvents().length, 11);
+            graph.deRegister(['a','b','c']);
+
+            var newEvents = graph.listEvents();
+            assert.equal(newEvents.length, 8);
+            assert.deepEqual(newEvents, ['d','e','f','g','h','i','j','k']);
+        });
+        it('should do nothing if input is not array of strings', function () {
+            events.forEach(function(e){
+                graph.register(e, graph);
+            });
+            assert.equal(graph.listEvents().length, 11);
+
+            graph.deRegister([{name: 'a'}]);
+            assert.equal(graph.listEvents().length, 11);
+
+            graph.deRegister('a');
+            assert.equal(graph.listEvents().length, 11);
+        });
+        it('should not remove event if start is running', function () {
+            events.forEach(function(e){
+                graph.register(e, graph);
+            });
+            assert.equal(graph.listEvents().length, 11);
+            graph._initializing = true;
+            graph.deRegister(['a','b','c']);
+            assert.equal(graph.listEvents().length, 11);
+        });
     });
 });
