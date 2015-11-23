@@ -173,6 +173,7 @@ describe('asyncgraph', function(){
 
         graph.on('error', function(e){
             assert(e.message === 'bad bad bad');
+            assert.equal(e.nodeName, 'bad');
             done();
         });
 
@@ -196,6 +197,7 @@ describe('asyncgraph', function(){
         });
 
         graph.on('error', function(e){
+            assert.equal(e.nodeName, 'bad');
             assert(e.message === 'bad bad bad');
             done();
         });
@@ -219,6 +221,7 @@ describe('asyncgraph', function(){
 
         graph.on('error', function(e){
             assert(e.message === 'bad bad bad');
+            assert.equal(e.nodeName, 'bad');
             done();
         });
 
