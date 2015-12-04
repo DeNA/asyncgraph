@@ -1,6 +1,6 @@
 {
   "name": "asyncgraph",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "very simply module for controlling flow between asynchronous code",
   "repository": {
     "url": "git@github.com:DeNA/asyncgraph.git"
